@@ -3,15 +3,7 @@
 const express = require("express");
 const app = new express();
 const bodyParser = require("body-parser");
-const admin = require("firebase-admin");
-const serviceAccount = require("./config/firebase.json");
-
-// firebase init
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
-
-const db = admin.firestore();
+const { auth, db } = require("./config/config");
 
 // register JSON parser middlewear
 app.use(bodyParser.json());
