@@ -7,14 +7,22 @@ const getAnimeRoutes = app => {
   const router = new Router();
 
   router
-    .get("/get/:id", (req, res) => {
-      const id = parseInt(req.params.id);
-      const result = animeController.getById(id);
-      res.send(result);
-    })
-    .get("/all", (req, res) => {
+
+    // get all anime
+    .get("/", (req, res) => {
       const result = animeController.getAll();
       res.send(result);
+    })
+
+    // get a single anime by it's Id
+    .get("/:id", (req, res) => {
+      const id = parseInt(req.params.id);
+      const result = animeController.getById(id);
+      if (result) {
+        res.send(result);
+      } else {
+        res.send("Anime Missing");
+      }
     });
 
   app.use("/anime", router);
