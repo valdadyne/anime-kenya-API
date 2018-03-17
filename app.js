@@ -3,9 +3,9 @@
 const express = require("express");
 const app = new express();
 const bodyParser = require("body-parser");
-const { auth, db } = require("./config/config");
 
-// register JSON parser middlewear
+// register body-parser middlewear
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 require("./app/anime/animeRoutes")(app);
