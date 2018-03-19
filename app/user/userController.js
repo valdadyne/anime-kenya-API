@@ -42,6 +42,7 @@ class UserController {
       .signOut()
       .then(() => {
         this.authStatus = "Successful SignOut " + this.activeUser;
+        this.activeUser = "";
       })
       .catch(err => {
         this.authStatus = err.message;
@@ -50,23 +51,46 @@ class UserController {
   }
 
   getAll() {
+    if (this.activeUser != "") {
+      admin
+        .auth()
+        .listUsers()
+        .then(listUsersResult => {
+          listUsersResult.users.forEach(userRecord => {
+            let duplicate = this.allUsers.indexOf(userRecord.uid);
+            if (duplicate == -1) {
+              this.allUsers.push([userRecord.uid, userRecord.email]);
+            }
+            this.authStatus = "";
+          });
+        })
+        .catch(err => {
+          this.authStatus = err.message;
+        });
+      if (this.authStatus === "") {
+        return this.allUsers;
+      } else {
+        return this.authStatus;
+      }
+    } else {
+      this.authStatus = "SignIn/SignUp first mate !!";
+      return this.authStatus;
+    }
+  }
+
+  getById(uid) {
     admin
       .auth()
-      .listUsers()
-      .then(listUsersResult => {
-        listUsersResult.users.forEach(userRecord => {
-          let duplicate = this.allUsers.indexOf(userRecord.email);
-          if (duplicate == -1) {
-            this.allUsers.push(userRecord.email);
-          }
-          this.authStatus = "";
-        });
+      .getUser(uid)
+      .then(userRecord => {
+        this.user = [userRecord.uid, userRecord.email];
+        this.authStatus = "";
       })
       .catch(err => {
         this.authStatus = err.message;
       });
     if (this.authStatus === "") {
-      return this.allUsers;
+      return "This user exists " + this.user;
     } else {
       return this.authStatus;
     }
@@ -77,7 +101,7 @@ class UserController {
       .auth()
       .getUserByEmail(email)
       .then(userRecord => {
-        this.user = userRecord.email;
+        this.user = [userRecord.uid, userRecord.email];
         this.authStatus = "";
       })
       .catch(err => {
