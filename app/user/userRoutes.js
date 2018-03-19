@@ -15,9 +15,16 @@ const getUserRoutes = app => {
     })
 
     // get user by email
-    .post("/userId/?", (req, res) => {
+    .post("/userEmail/?", (req, res) => {
       let { email } = req.query;
       let result = userController.getByEmail(email);
+      res.send(result);
+    })
+
+    // get user by id
+    .post("/userId/?", (req, res) => {
+      let { uid } = req.query;
+      let result = userController.getById(uid);
       res.send(result);
     })
 
