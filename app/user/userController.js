@@ -7,6 +7,7 @@ class UserController {
   constructor() {
     this.activeUser;
     this.authStatus;
+    this.user;
     this.allUsers = [];
   }
 
@@ -66,6 +67,24 @@ class UserController {
       });
     if (this.authStatus === "") {
       return this.allUsers;
+    } else {
+      return this.authStatus;
+    }
+  }
+
+  getByEmail(email) {
+    admin
+      .auth()
+      .getUserByEmail(email)
+      .then(userRecord => {
+        this.user = userRecord.email;
+        this.authStatus = "";
+      })
+      .catch(err => {
+        this.authStatus = err;
+      });
+    if (this.authStatus === "") {
+      return this.user;
     } else {
       return this.authStatus;
     }
