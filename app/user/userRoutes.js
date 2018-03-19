@@ -41,7 +41,7 @@ const getUserRoutes = app => {
       res.send(result);
     });
 
-  app.use("/user", router);
+  app.use("/users", router);
 };
 
 module.exports = getUserRoutes;
