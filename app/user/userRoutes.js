@@ -11,7 +11,14 @@ const getUserRoutes = app => {
     // get all users
     .post("/all", (req, res) => {
       let result = userController.getAll();
-      res.json(result);
+      res.send(result);
+    })
+
+    // get user by email
+    .post("/userId/?", (req, res) => {
+      let { email } = req.query;
+      let result = userController.getByEmail(email);
+      res.send(result);
     })
 
     // create a new user
