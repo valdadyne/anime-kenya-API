@@ -8,6 +8,12 @@ const getUserRoutes = app => {
 
   router
 
+    // get all users
+    .post("/all", (req, res) => {
+      let result = userController.getAll();
+      res.json(result);
+    })
+
     // create a new user
     .post("/signup", (req, res) => {
       let { email, password } = req.body;
@@ -19,6 +25,12 @@ const getUserRoutes = app => {
     .post("/signin", (req, res) => {
       let { email, password } = req.body;
       let result = userController.signIn(email, password);
+      res.send(result);
+    })
+
+    // signOut user
+    .post("/signout", (req, res) => {
+      let result = userController.signOut();
       res.send(result);
     });
 
