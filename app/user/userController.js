@@ -63,7 +63,7 @@ class UserController {
         });
       })
       .catch(err => {
-        this.authStatus = err;
+        this.authStatus = err.message;
       });
     if (this.authStatus === "") {
       return this.allUsers;
@@ -81,10 +81,10 @@ class UserController {
         this.authStatus = "";
       })
       .catch(err => {
-        this.authStatus = err;
+        this.authStatus = err.message;
       });
     if (this.authStatus === "") {
-      return this.user;
+      return "This user exists " + this.user;
     } else {
       return this.authStatus;
     }
