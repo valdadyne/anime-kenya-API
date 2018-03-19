@@ -8,7 +8,7 @@ It contains the following endpoints:
 
 <br/>
 
-#####User EndPoints
+##### User EndPoints
 
 ---
 
@@ -22,7 +22,7 @@ It contains the following endpoints:
 
 <br>
 
-#####Anime EndPoints
+##### Anime EndPoints
 
 ---
 
@@ -35,7 +35,7 @@ It contains the following endpoints:
 
 <br>
 
-#####Reviews EndPoints
+##### Reviews EndPoints
 
 ---
 
@@ -48,7 +48,7 @@ It contains the following endpoints:
 
 <br>
 
-#####Comments EndPoints
+##### Comments EndPoints
 
 ---
 
@@ -61,7 +61,7 @@ It contains the following endpoints:
 
 <br>
 
-#####Top 10 List EndPoints
+##### Top 10 List EndPoints
 
 ---
 
